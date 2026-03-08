@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="yo.css">
-    
-    <title>Document</title>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="yo.css">
 
+<title>CS2 Team Manager</title>
 
 </head>
 
 <body>
 
-<header>
+<header class="topbar">
 
-<img src="logo.png" id="logo">
+<img src="game-icon.png" id="logo">
+
 <h1>CS2 TEAM MANAGER</h1>
 
 </header>
 
 <div class="container">
 
-    <h3>Map</h3>
+<div class="map-section">
+
+<h3 class="map-title">Map</h3>
 
 <select id="mapSelect" onchange="changeMap()">
 
-<option value="dust2">Dust2</option>
+<option value="dust_II">Dust2</option>
 <option value="mirage">Mirage</option>
 <option value="inferno">Inferno</option>
 <option value="nuke">Nuke</option>
@@ -36,9 +39,15 @@
 <option value="anubis">Anubis</option>
 
 </select>
-<div class="map-section" id="map">
 
-    <img id="mapImage" src="map_dust2.png">
+<div class="map-wrapper">
+
+<img id="mapImage" src="mapy/dust_II_radar.png">
+
+<div id="map"></div>
+
+</div>
+
 </div>
 
 <div class="sidebar">
@@ -89,7 +98,7 @@
 
 </div>
 
-<div id="editForm" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; padding:20px;">
+<div id="editForm" class="edit-form">
 
 <h3>Edit Player</h3>
 

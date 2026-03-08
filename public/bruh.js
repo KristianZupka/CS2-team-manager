@@ -29,12 +29,13 @@ function renderPlayers(players){
   const div = document.createElement("div");
   div.className = "player";
 
-  div.innerHTML = `
-  <div>
-   <b>${p.nickname}</b>
-   <small>${p.role}</small>
+  let roleText = p.type === "coach" ? "Coach" : p.role;
+
+div.innerHTML = `
+${p.nickname} - ${roleText}
   </div>
 
+  
   <button onclick="editPlayer(${p.id})">Edit</button>
   <button onclick="deletePlayer(${p.id})">Delete</button>
   `;
@@ -46,6 +47,7 @@ function renderPlayers(players){
   const dot = document.createElement("div");
 
   dot.className = "dot";
+  makeDraggable(dot,p)
 
   dot.style.left = p.position.x + "px";
   dot.style.top = p.position.y + "px";
@@ -152,6 +154,39 @@ function changeMap(){
 
  const img = document.getElementById("mapImage")
 
- img.src = `map_${map}.png`
+ img.src = "mapy/" + map + "_radar.png"
+
+}
+
+function makeDraggable(dot, player){
+
+ const map = document.getElementById("map")
+
+ let dragging = false
+
+ dot.addEventListener("mousedown",(e)=>{
+  dragging = true
+ })
+
+ document.addEventListener("mousemove",(e)=>{
+
+  if(!dragging) return
+
+  const rect = map.getBoundingClientRect()
+
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+
+  dot.style.left = x + "px"
+  dot.style.top = y + "px"
+
+  player.position.x = x
+  player.position.y = y
+
+ })
+
+ document.addEventListener("mouseup",()=>{
+  dragging = false
+ })
 
 }

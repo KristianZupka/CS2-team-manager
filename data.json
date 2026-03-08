@@ -10,9 +10,9 @@
     }
   },
   {
-    "id": 1772981631070,
-    "nickname": "JacoSnack",
-    "role": "Entry",
+    "id": 1772981693199,
+    "nickname": "play3r444",
+    "role": "Lurker",
     "type": "player",
     "position": {
       "x": 0,
@@ -20,8 +20,18 @@
     }
   },
   {
-    "id": 1772981648204,
-    "nickname": "Lukyyn",
+    "id": 1772998890303,
+    "nickname": "ss",
+    "role": "IGL",
+    "type": "player",
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "id": 1772998906708,
+    "nickname": "ss",
     "role": "AWPer",
     "type": "player",
     "position": {
@@ -30,19 +40,19 @@
     }
   },
   {
-    "id": 1772981664203,
-    "nickname": "chromak",
-    "role": "Anchor",
-    "type": "player",
+    "id": 1773000981932,
+    "nickname": "kouč",
+    "role": "IGL",
+    "type": "coach",
     "position": {
       "x": 0,
       "y": 0
     }
   },
   {
-    "id": 1772981693199,
-    "nickname": "play3r444",
-    "role": "Lurker",
+    "id": 1773001165709,
+    "nickname": "kouč",
+    "role": "IGL",
     "type": "player",
     "position": {
       "x": 0,
