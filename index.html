@@ -8,31 +8,150 @@
 </head>
 <body>
     
-    <div class="header">
-        <div class="logo">LOGO</div>
-        <div class="title">CS2 TEAM MANAGER</div>
-    </div>
 
-    
-    <div class="main">
+    <!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>CS2 Team Manager</title>
 
-       
-        <div class="map">
-            Interaktivní mapa
+</head>
+
+<body>
+
+<!-- HEADER  -->
+<div class="header">
+    <div class="logo">LOGO</div>
+    <div class="title">CS2 TEAM MANAGER</div>
+</div>
+
+<!--  MAIN -->
+<div class="main">
+
+    <!-- MAP -->
+    <div class="map-section">
+        <div class="map-select">
+            <label>Mapa:</label>
+            <select>
+                <option>Mirage</option>
+                <option>Inferno</option>
+                <option>Nuke</option>
+                <option>Ancient</option>
+                <option>Anubis</option>
+                <option>Overpass</option>
+                <option>Dust II</option>
+            </select>
         </div>
 
-        
-        <div class="side">
+        <div class="map" id="map">
+            <!-- draggable doty -->
+            <div class="dot" draggable="true"></div>
+            <div class="dot" draggable="true"></div>
+            <div class="dot" draggable="true"></div>
+            <div class="dot" draggable="true"></div>
+            <div class="dot" draggable="true"></div>
+            <div class="dot" draggable="true"></div>
+        </div>
+    </div>
 
-            <div class="side-header">
-                <div class="button">Přidat hráče</div>
-                <div class="count">X</div>
+    <!-- SIDE PANELY -->
+    <div class="side">
+        <h2>Tým</h2>
+        <div class="note">
+            Data budou načítána z API (vlastní endpointy)<br>
+            Max 6 osob (5 hráčů + coach)
+        </div>
+
+        <!-- PLAYER TEMPLATY -->
+        <div class="player">
+            <div class="player-top">
+                <div class="avatar"></div>
+                <strong>Coach</strong>
             </div>
+            <input placeholder="Nickname">
+        </div>
+        <div class="player">
+            <div class="player-top">
+                <div class="avatar"></div>
+                <strong>Player</strong>
+            </div>
+            <input placeholder="Nickname">
+            <select>
+                <option>AWPer</option>
+                <option>IGL</option>
+                <option>Entry</option>
+                <option>Lurker</option>
+                <option>Anchor</option>
+            </select>
+        </div>
 
-            
-            
+        <div class="player">
+            <div class="player-top">
+                <div class="avatar"></div>
+                <strong>Player</strong>
+            </div>
+            <input placeholder="Nickname">
+            <select>
+                <option>AWPer</option>
+                <option>IGL</option>
+                <option>Entry</option>
+                <option>Lurker</option>
+                <option>Anchor</option>
+            </select>
+        </div>
 
+        <div class="player">
+            <div class="player-top">
+                <div class="avatar"></div>
+                <strong>Player</strong>
+            </div>
+            <input placeholder="Nickname">
+            <select>
+                <option>AWPer</option>
+                <option>IGL</option>
+                <option>Entry</option>
+                <option>Lurker</option>
+                <option>Anchor</option>
+            </select>
+        </div>
+
+        <div class="player">
+            <div class="player-top">
+                <div class="avatar"></div>
+                <strong>Player</strong>
+            </div>
+            <input placeholder="Nickname">
+            <select>
+                <option>AWPer</option>
+                <option>IGL</option>
+                <option>Entry</option>
+                <option>Lurker</option>
+                <option>Anchor</option>
+            </select>
+        </div>
+
+        <div class="player">
+            <div class="player-top">
+                <div class="avatar"></div>
+                <strong>Player</strong>
+            </div>
+            <input placeholder="Nickname">
+            <select>
+                <option>AWPer</option>
+                <option>IGL</option>
+                <option>Entry</option>
+                <option>Lurker</option>
+                <option>Anchor</option>
+            </select>
+        </div>
+
+
+        <div class="limit">
+            ● Každý hráč má vlastní draggable dot na mapě
         </div>
     </div>
+
+</div>
+   
 </body>
 </html>
