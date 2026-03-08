@@ -1,5 +1,12 @@
+const playerColors = [
+"#ff0000",
+"#00ff00",
+"#0099ff",
+"#ffff00",
+"#ff00ff",
+"#00ffff"
+]
 let editingId = null;
-
 async function loadPlayers(){
 
  const res = await fetch("/players");
@@ -11,14 +18,18 @@ async function loadPlayers(){
 function renderPlayers(players){
 
  const playersDiv = document.getElementById("players");
+ const map = document.getElementById("map");
+
  playersDiv.innerHTML = "";
 
- players.forEach(p=>{
+ map.querySelectorAll(".dot").forEach(dot => dot.remove());
+
+ players.forEach((p,index)=>{
 
   const div = document.createElement("div");
-  div.className="player";
+  div.className = "player";
 
-  div.innerHTML=`
+  div.innerHTML = `
   <div>
    <b>${p.nickname}</b>
    <small>${p.role}</small>
@@ -29,6 +40,21 @@ function renderPlayers(players){
   `;
 
   playersDiv.appendChild(div);
+
+
+  // vytvoření tečky na mapě
+  const dot = document.createElement("div");
+
+  dot.className = "dot";
+
+  dot.style.left = p.position.x + "px";
+  dot.style.top = p.position.y + "px";
+
+  dot.style.background = playerColors[index % playerColors.length];
+
+  dot.draggable = true;
+
+  map.appendChild(dot);
 
  });
 
@@ -119,3 +145,13 @@ async function filterPlayers(){
 }
 
 loadPlayers();
+
+function changeMap(){
+
+ const map = document.getElementById("mapSelect").value
+
+ const img = document.getElementById("mapImage")
+
+ img.src = `map_${map}.png`
+
+}

@@ -76,7 +76,8 @@ app.post("/edit/:id",(req,res)=>{
  players[index] = {
   ...players[index],
   nickname: req.body.nickname || players[index].nickname,
-  role: req.body.role || players[index].role
+  role: req.body.role || players[index].role,
+  position: req.body.position || players[index].position
  };
 
  saveData(players);
