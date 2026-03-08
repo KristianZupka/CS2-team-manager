@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/KristianZupka/CS2-team-manager/issues"
   },
-  "homepage": "https://github.com/KristianZupka/CS2-team-manager#readme"
+  "homepage": "https://github.com/KristianZupka/CS2-team-manager#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
