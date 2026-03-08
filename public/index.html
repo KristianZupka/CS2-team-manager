@@ -6,50 +6,95 @@
     <link rel="stylesheet" href="yo.css">
     
     <title>Document</title>
+
+
+
+
 </head>
 
-    
 <body>
 
 <header>
-    <img src="logo.png" id="logo">
-    <h1>CS2 TEAM MANAGER</h1>
+
+<img src="logo.png" id="logo">
+<h1>CS2 TEAM MANAGER</h1>
+
 </header>
 
 <div class="container">
 
-    <div class="map-section">
-        <!-- tady bude mapa -->
-    </div>
+<div class="map-section" id="map"></div>
 
-    <div class="sidebar">
+<div class="sidebar">
 
-        <h2>Players</h2>
+<h2>Players</h2>
 
-        <div id="players"></div>
+<h3>Filter by role</h3>
 
-        <h3>Add Player</h3>
+<select id="filterRole">
 
-        <input id="nickname" placeholder="Nickname">
+<option value="">All</option>
+<option>AWPer</option>
+<option>IGL</option>
+<option>Entry</option>
+<option>Lurker</option>
+<option>Anchor</option>
 
-        <select id="role">
-            <option>AWPer</option>
-            <option>IGL</option>
-            <option>Entry</option>
-            <option>Lurker</option>
-            <option>Anchor</option>
-            <option>Coach</option>
-        </select>
+</select>
 
-        <input id="avatar" placeholder="Avatar URL">
+<button onclick="filterPlayers()">Filter</button>
 
-        <button onclick="addPlayer()">Add Player</button>
+<div id="players"></div>
 
-    </div>
+<h3>Add Player</h3>
+
+<input id="nickname" placeholder="Nickname">
+
+<select id="type">
+
+<option value="player">Player</option>
+<option value="coach">Coach</option>
+
+</select>
+
+<select id="role">
+
+<option>AWPer</option>
+<option>IGL</option>
+<option>Entry</option>
+<option>Lurker</option>
+<option>Anchor</option>
+
+</select>
+
+<button onclick="addPlayer()">Add Player</button>
 
 </div>
 
-<script src="script.js"></script>
+</div>
+
+<div id="editForm" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; padding:20px;">
+
+<h3>Edit Player</h3>
+
+<input id="editNickname">
+
+<select id="editRole">
+
+<option>AWPer</option>
+<option>IGL</option>
+<option>Entry</option>
+<option>Lurker</option>
+<option>Anchor</option>
+
+</select>
+
+<button onclick="saveEdit()">Save</button>
+<button onclick="closeEdit()">Cancel</button>
+
+</div>
+
+<script src="bruh.js"></script>
 
 </body>
 </html>

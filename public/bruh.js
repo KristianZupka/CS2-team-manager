@@ -1,71 +1,121 @@
-app.use(express.static("public"));
-
-const dots = document.querySelectorAll(".dot");
-const map = document.getElementById("map");
-
-dots.forEach(dot => {
-    dot.addEventListener("dragstart", e => {
-        e.dataTransfer.setData("text/plain", "");
-        dragged = dot;
-    });
-});
-
-map.addEventListener("dragover", e => e.preventDefault());
-
-map.addEventListener("drop", e => {
-    const rect = map.getBoundingClientRect();
-    dragged.style.left = (e.clientX - rect.left - 9) + "px";
-    dragged.style.top = (e.clientY - rect.top - 9) + "px";
-});
-
-async function addPlayer(){
-
-    const nickname = document.getElementById("nickname").value
-    const role = document.getElementById("role").value
-    const avatar = document.getElementById("avatar").value
-
-    await fetch("/players",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-            nickname,
-            role,
-            avatar
-        })
-    })
-
-    loadPlayers()
-
-}
+let editingId = null;
 
 async function loadPlayers(){
 
-    const res = await fetch("/players")
-    const players = await res.json()
+ const res = await fetch("/players");
+ const players = await res.json();
 
-    const playersDiv = document.getElementById("players")
+ renderPlayers(players);
+}
 
-    playersDiv.innerHTML = ""
+function renderPlayers(players){
 
-    players.forEach(p => {
+ const playersDiv = document.getElementById("players");
+ playersDiv.innerHTML = "";
 
-        const div = document.createElement("div")
-        div.className = "player"
+ players.forEach(p=>{
 
-        div.innerHTML = `
-            <img class="avatar" src="${p.avatar || 'https://via.placeholder.com/40'}">
-            <div>
-                <div>${p.nickname}</div>
-                <small>${p.role}</small>
-            </div>
-        `
+  const div = document.createElement("div");
+  div.className="player";
 
-        playersDiv.appendChild(div)
+  div.innerHTML=`
+  <div>
+   <b>${p.nickname}</b>
+   <small>${p.role}</small>
+  </div>
 
-    })
+  <button onclick="editPlayer(${p.id})">Edit</button>
+  <button onclick="deletePlayer(${p.id})">Delete</button>
+  `;
+
+  playersDiv.appendChild(div);
+
+ });
 
 }
 
-loadPlayers()
+async function addPlayer(){
+
+ const nickname = document.getElementById("nickname").value;
+ const role = document.getElementById("role").value;
+ const type = document.getElementById("type").value;
+
+ await fetch("/players",{
+  method:"POST",
+  headers:{
+   "Content-Type":"application/json"
+  },
+  body:JSON.stringify({nickname,role,type})
+ });
+
+ loadPlayers();
+}
+
+async function deletePlayer(id){
+
+ if(!confirm("Delete player?")) return;
+
+ await fetch(`/delete/${id}`,{
+  method:"DELETE"
+ });
+
+ loadPlayers();
+}
+
+async function editPlayer(id){
+
+ editingId = id;
+
+ const res = await fetch(`/player/${id}`);
+ const player = await res.json();
+
+ document.getElementById("editNickname").value = player.nickname;
+ document.getElementById("editRole").value = player.role;
+
+ document.getElementById("editForm").style.display="block";
+}
+
+async function saveEdit(){
+
+ const nickname = document.getElementById("editNickname").value;
+ const role = document.getElementById("editRole").value;
+
+ await fetch(`/edit/${editingId}`,{
+
+  method:"POST",
+
+  headers:{
+   "Content-Type":"application/json"
+  },
+
+  body:JSON.stringify({nickname,role})
+
+ });
+
+ closeEdit();
+ loadPlayers();
+}
+
+function closeEdit(){
+
+ document.getElementById("editForm").style.display="none";
+
+}
+
+async function filterPlayers(){
+
+ const role = document.getElementById("filterRole").value;
+
+ let url="/players";
+
+ if(role){
+  url=`/players?role=${role}`;
+ }
+
+ const res = await fetch(url);
+ const players = await res.json();
+
+ renderPlayers(players);
+}
+
+loadPlayers();

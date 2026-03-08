@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": 1772981602774,
+    "nickname": "NopexD",
+    "role": "IGL",
+    "type": "player",
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "id": 1772981631070,
+    "nickname": "JacoSnack",
+    "role": "Entry",
+    "type": "player",
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "id": 1772981648204,
+    "nickname": "Lukyyn",
+    "role": "AWPer",
+    "type": "player",
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "id": 1772981664203,
+    "nickname": "chromak",
+    "role": "Anchor",
+    "type": "player",
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "id": 1772981693199,
+    "nickname": "play3r444",
+    "role": "Lurker",
+    "type": "player",
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "id": 1772981708049,
+    "nickname": "IDK",
+    "role": "Lurker",
+    "type": "coach",
+    "position": {
+      "x": 0,
+      "y": 0
+    }
+  }
+]

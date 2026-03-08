@@ -1,6 +1,5 @@
 const express = require("express");
 const fs = require("fs");
-const path = require("path");
 
 const app = express();
 const PORT = 3000;
@@ -9,97 +8,93 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-/* ================= HELPER FUNCTIONS ================= */
-
-function loadData() {
-    const data = fs.readFileSync("data.json", "utf-8");
-    return JSON.parse(data);
+function loadData(){
+ const data = fs.readFileSync("data.json","utf8");
+ return JSON.parse(data);
 }
 
-function saveData(data) {
-    fs.writeFileSync("data.json", JSON.stringify(data, null, 2));
+function saveData(data){
+ fs.writeFileSync("data.json",JSON.stringify(data,null,2));
 }
 
-/* ================= ROUTES ================= */
+app.get("/players",(req,res)=>{
 
-// GET ALL PLAYERS
-app.get("/players", (req, res) => {
-    const players = loadData();
-    res.json(players);
+ const players = loadData();
+ const role = req.query.role;
+
+ if(role){
+  const filtered = players.filter(p=>p.role === role);
+  return res.json(filtered);
+ }
+
+ res.json(players);
 });
 
-// GET ONE PLAYER
-app.get("/player/:id", (req, res) => {
-    const players = loadData();
-    const player = players.find(p => p.id == req.params.id);
+app.get("/player/:id",(req,res)=>{
 
-    if (!player) {
-        return res.status(404).json({ message: "Hráč nenalezen" });
-    }
+ const players = loadData();
+ const player = players.find(p=>p.id == req.params.id);
 
-    res.json(player);
+ if(!player){
+  return res.status(404).json({message:"Player not found"});
+ }
+
+ res.json(player);
 });
 
-// CREATE PLAYER (max 6)
-app.post("/players", (req, res) => {
-    const players = loadData();
+app.post("/players",(req,res)=>{
 
-    if (players.length >= 6) {
-        return res.status(400).json({ message: "Maximální počet hráčů je 6." });
-    }
+ const players = loadData();
 
-    const newPlayer = {
-        id: Date.now(),
-        nickname: req.body.nickname,
-        role: req.body.role,
-        type: req.body.type, // player nebo coach
-        avatar: req.body.avatar || "",
-        position: {
-            x: 0,
-            y: 0
-        }
-    };
+ if(players.length >= 6){
+  return res.status(400).json({message:"Max players is 6"});
+ }
 
-    players.push(newPlayer);
-    saveData(players);
+ const newPlayer = {
+  id: Date.now(),
+  nickname: req.body.nickname,
+  role: req.body.role,
+  type: req.body.type,
+  position:{x:0,y:0}
+ };
 
-    res.json({ message: "Hráč vytvořen", player: newPlayer });
+ players.push(newPlayer);
+ saveData(players);
+
+ res.json(newPlayer);
 });
 
-// EDIT PLAYER
-app.post("/edit/:id", (req, res) => {
-    const players = loadData();
-    const index = players.findIndex(p => p.id == req.params.id);
+app.post("/edit/:id",(req,res)=>{
 
-    if (index === -1) {
-        return res.status(404).json({ message: "Hráč nenalezen" });
-    }
+ const players = loadData();
+ const index = players.findIndex(p=>p.id == req.params.id);
 
-    players[index] = {
-        ...players[index],
-        nickname: req.body.nickname || players[index].nickname,
-        role: req.body.role || players[index].role,
-        avatar: req.body.avatar || players[index].avatar,
-        position: req.body.position || players[index].position
-    };
+ if(index === -1){
+  return res.status(404).json({message:"Player not found"});
+ }
 
-    saveData(players);
+ players[index] = {
+  ...players[index],
+  nickname: req.body.nickname || players[index].nickname,
+  role: req.body.role || players[index].role
+ };
 
-    res.json({ message: "Hráč upraven", player: players[index] });
+ saveData(players);
+
+ res.json(players[index]);
 });
 
-// DELETE PLAYER
-app.delete("/delete/:id", (req, res) => {
-    let players = loadData();
-    players = players.filter(p => p.id != req.params.id);
+app.delete("/delete/:id",(req,res)=>{
 
-    saveData(players);
+ let players = loadData();
 
-    res.json({ message: "Hráč smazán" });
+ players = players.filter(p=>p.id != req.params.id);
+
+ saveData(players);
+
+ res.json({message:"Player deleted"});
 });
 
-/* ================= START SERVER ================= */
-
-app.listen(PORT, () => {
-    console.log(`Server běží na http://localhost:${PORT}`);
+app.listen(PORT,()=>{
+ console.log(`Server running on http://localhost:${PORT}`);
 });
